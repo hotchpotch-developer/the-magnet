@@ -1,11 +1,30 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { fetchData, validateForm } from "../../components/Helper";
+import { LOGIN } from "../../components/APIRoutes";
 
 const Login = () => {
 
     const passwordAddedOn = () => {
         let element = document.querySelector('#password-input');
         element.setAttribute('type', element.type === 'password' ? 'text' : 'password');
+    }
+
+    const signIn = (e) => {
+        e.preventDefault();
+
+        if(validateForm(e, 'loginForm')){
+
+            let formData = new FormData(document.getElementById('loginForm'));
+
+            fetchData(LOGIN, 'POST', formData, false, true, (res) => {
+                if(res.status == 200){
+                    console.log(res);
+                }
+            })
+
+        }
+
     }
 
     useEffect(() => {
@@ -39,10 +58,10 @@ const Login = () => {
                                             <p className="text-muted">Sign in to continue to Velzon.</p>
                                         </div>
                                         <div className="p-2 mt-4">
-                                            <form>
+                                            <form className="need-validation" noValidate id="loginForm">
                                                 <div className="mb-3">
-                                                    <label htmlFor="username" className="form-label">Username</label>
-                                                    <input type="text" className="form-control" id="username" placeholder="Enter username" />
+                                                    <label htmlFor="email" className="form-label">Email</label>
+                                                    <input type="text" name="email" className="form-control" id="email" placeholder="Email" required />
                                                 </div>
 
                                                 <div className="mb-3">
@@ -51,13 +70,13 @@ const Login = () => {
                                                     </div>
                                                     <label className="form-label" htmlFor="password-input">Password</label>
                                                     <div className="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" className="form-control pe-5 password-input" placeholder="Enter password" id="password-input" />
+                                                        <input type="password" name="password" className="form-control pe-5 password-input" placeholder="Password" id="password-input" required />
                                                         <button className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon" onClick={() => passwordAddedOn()}><i className="ri-eye-fill align-middle"></i></button>
                                                     </div>
                                                 </div>
 
                                                 <div className="mt-4">
-                                                    <button className="btn btn-primary w-100" type="submit">Sign In</button>
+                                                    <button className="btn btn-primary w-100" type="button" onClick={(e) => signIn(e)}>Sign In</button>
                                                 </div>
                                             </form>
                                         </div>
