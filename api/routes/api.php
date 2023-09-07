@@ -16,3 +16,11 @@ use App\Http\Controllers\API\AuthController;
 */
 
 Route::post('login', [AuthController::class, 'login']);
+
+Route::group(['middleware' => ['auth:sanctum']], function() {
+    
+    #Get User Info
+    Route::get('get-auth-user-info', [AuthController::class, 'getAuthUserInfo']);
+
+
+});

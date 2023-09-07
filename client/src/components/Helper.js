@@ -15,7 +15,7 @@ export const fetchData = async (url, method, data, token, process, res, abort_si
     }
 
     if (token) {
-        let TOKEN = localStorage.getItem('waae-token')
+        let TOKEN = localStorage.getItem('accessToken')
         headers = { ...headers, 'Authorization': 'Bearer ' + TOKEN }
     }
 
@@ -34,10 +34,8 @@ export const fetchData = async (url, method, data, token, process, res, abort_si
 
     await fetch(`${ENDPOINT}${url}`, request).then((response) => process_type === "text" ? response.text() : (process_type === "blob" ? response.blob() : response.json())).then((json) => {
         
-        if (json.message === "Unauthenticated." || json.type === "block_user") {
-            if (json.type === "block_user") localStorage.setItem("block_user", JSON.stringify(json));
-            localStorage.removeItem("waae-token");
-            localStorage.removeItem('waae-admin-token')
+        if (json.message === "Unauthenticated.") {
+            localStorage.removeItem("accessToken");
             window.location.href = '/'
         } else if (!json.records) {
             showAlertMsg(json, form_id)

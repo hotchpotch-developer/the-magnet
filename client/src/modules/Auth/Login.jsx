@@ -1,9 +1,13 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchData, validateForm } from "../../components/Helper";
 import { LOGIN } from "../../components/APIRoutes";
+import { Context } from "../../components/Context"
 
 const Login = () => {
+
+    const [context, setContext] = useContext(Context)
+    const navigate = useNavigate()
 
     const passwordAddedOn = () => {
         let element = document.querySelector('#password-input');
@@ -18,8 +22,10 @@ const Login = () => {
             let formData = new FormData(document.getElementById('loginForm'));
 
             fetchData(LOGIN, 'POST', formData, false, true, (res) => {
-                if(res.status == 200){
-                    console.log(res);
+                if(res.status == 200 && res.data){
+                    localStorage.setItem('accessToken', res.data.access_token)
+                    setContext(prev => ({...prev, auth: res.data}));
+                    navigate('/dashboard');
                 }
             })
 

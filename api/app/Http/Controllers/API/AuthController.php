@@ -141,4 +141,13 @@ class AuthController extends Controller
             return catchResponse(method: __METHOD__, exception: $th);
         }
     }
+
+    public function getAuthUserInfo(){
+        try {
+            $user = auth()->user()->only('id', 'role_id', 'first_name', 'last_name', 'email', 'profile_image', 'status');
+            return jsonResponse(status: 200, data: $user);
+        } catch (\Throwable $th) {
+            return catchResponse(method: __METHOD__, exception: $th);
+        }
+    }
 }
