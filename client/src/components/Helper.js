@@ -86,7 +86,7 @@ export const showAlertMsg = (data, form_id = false) => {
 
         const htmlToast = `<div id="${idGenerate}" class="toast fade toast-${data.success ? 'success' : 'danger'}" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay=${form_id === 'studentForm' ? 8000 : 4000}>
             <div class="toast-body first-text-uppercase">
-                <svg class="icon me-3"><use href="#icon_${seticon}"></use></svg>
+                <i class="ri-${data.success ? 'checkbox-circle' : 'close-circle'}-line"></i>
                 <span>${data.error ? data.error : data.success}</span>
             </div>
             <button type="button" class="btn-close ms-auto me-3" data-bs-dismiss="toast" aria-label="Close" title="Close"></button>

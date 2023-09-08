@@ -100,8 +100,7 @@ const Login = () => {
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="text-center">
-                                    <p className="mb-0 text-muted">&copy; Velzon. Designed by <i className="mdi mdi-heart text-danger"></i> by .
-                                    </p>
+                                    <p className="mb-0 text-muted">&copy; Copyright 2023. All rights reserved.</p>
                                 </div>
                             </div>
                         </div>

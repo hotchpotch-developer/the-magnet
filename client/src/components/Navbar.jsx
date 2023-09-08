@@ -40,6 +40,24 @@ const Navbar = () => {
                                 <Link className="nav-link menu-link" to="/dashboard">
                                     <i className="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboard</span>
                                 </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link menu-link" to="#managerMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="managerMenu">
+                                    <i className="ri-user-2-line"></i> <span data-key="t-apps">Permission</span>
+                                </Link>
+                                <div className="collapse menu-dropdown" id="managerMenu">
+                                    <ul className="nav nav-sm flex-column">
+                                        <li className="nav-item">
+                                            <Link to="/manage-roles" className="nav-link" data-key="t-calendar"> Manage Roles </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link to="/manage-permission" className="nav-link" data-key="t-chat"> Manage Permission </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link to="/user-permission" className="nav-link" data-key="t-chat"> User Permission </Link>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li> 
                             <li className="nav-item">
                                 <Link className="nav-link menu-link" to="#managerMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="managerMenu">
