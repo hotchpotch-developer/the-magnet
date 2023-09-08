@@ -14551,4 +14551,43 @@ body::before {
     margin: 0px;
     transform: translate(0px, 58px);
 }
+
+.toast-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    max-width: 1180px;
+    pointer-events: none;
+    padding: 10px 10px 5px 10px;
+}
+
+.toast-wrapper .toast {
+    width: 100%;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.toast-wrapper .toast .icon {
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+#toastContainer .toast.toast-success {
+    background: #66c99b;
+    border-color: #66c99b;
+    color: #fff;
+}
+
+#toastContainer .toast.toast-danger {
+    background: #f18275;
+    border-color: #f18275;
+    color: #fff;
+}
+
+/* End Toast */
+
 /*# sourceMappingURL=app.min.css.map */
