@@ -9,6 +9,7 @@ import CreateManager from "../modules/Manager/CreateManager";
 import ManageList from "../modules/CommonSettings/ManagesStates/ManageList";
 import { fetchData } from "./Helper";
 import { GET_AUTH_INFO } from "./APIRoutes";
+import ErrorPage from "./ErrorPage";
 
 
 const Routing = () => {
@@ -21,19 +22,21 @@ const Routing = () => {
 
         if(token) {
             fetchData(GET_AUTH_INFO, 'GET', '', true, false, (res) => {
-                if(res.status == 200 && res.data) {
+                if(res.status === 200 && res.data) {
                     setContext(prev => ({...prev, auth: res.data}));
                 }
             })
+        }else{
+            navigate('/')
         }
-    }, [token])
+    }, [token, navigate])
 
     return (
         <Context.Provider value={[context, setContext]}>
             <Routes>
                 {context && context.auth &&
-                    <Route caseSensitive={false} path="" element={<Layout />}>
-                        <Route caseSensitive={false} path="/" element={ <Dashboard />} />
+                    <Route caseSensitive={false} path="/" element={<Layout />}>
+                        <Route caseSensitive={false} path="dashboard" element={ <Dashboard />} />
 
                         {/* Manager Routes */}
                         <Route caseSensitive={false} path="/add-manager" element={ <CreateManager />} />
@@ -47,6 +50,7 @@ const Routing = () => {
                 
                 <Route caseSensitive={false} path="/" element={ <Login /> } />
                 <Route caseSensitive={false} path="/forgot-password" element={ <ForgotPassword /> } />
+                {!token ? <Route path="*" element={<ErrorPage />} /> : ''}
             </Routes>
         </Context.Provider>
     )

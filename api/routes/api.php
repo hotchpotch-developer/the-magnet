@@ -22,5 +22,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     #Get User Info
     Route::get('get-auth-user-info', [AuthController::class, 'getAuthUserInfo']);
 
+    #Logout
+    Route::get('logout', [AuthController::class, 'logout']);
 
 });

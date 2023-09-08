@@ -1,11 +1,40 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchData } from "./Helper";
+import { LOGOUT } from "./APIRoutes";
+import { Context } from "./Context";
 
 const TopHeader = () => {
+
+    const [dropDown, setDropDown] = useState(false)
+    const [notificationDD, setNotificationDD] = useState(false)
+    const [context, setContext] = useContext(Context)
+    const navigate = useNavigate()
 
     const openMenu = () => {
         const element = document.querySelector("body");
         element.classList.toggle('menu');
         
+    }
+
+    const profileDropDown = () => {
+        setDropDown(!dropDown)
+    }
+
+    const bellDropDown = () => {
+        setNotificationDD(!notificationDD);
+    }
+
+    const logout = () => {
+        if(context && context.auth){
+            fetchData(LOGOUT, 'GET', '', true, false, (res) => {
+                if(res.status === 200 && res.success) {
+                    localStorage.removeItem('accessToken');
+                    setContext('')
+                    navigate('/')
+                }
+            })
+        }
     }
 
     return (
@@ -15,23 +44,23 @@ const TopHeader = () => {
                     <div className="navbar-header">
                         <div className="d-flex">
                             <div className="navbar-brand-box horizontal-logo">
-                                <a href="/" className="logo logo-dark">
+                                <Link href="/" className="logo logo-dark">
                                     <span className="logo-sm">
                                         <img src="/images/logo-sm.png" alt="" height="22" />
                                     </span>
                                     <span className="logo-lg">
                                         <img src="/images/logo-dark.png" alt="" height="17" />
                                     </span>
-                                </a>
+                                </Link>
 
-                                <a href="/" className="logo logo-light">
+                                <Link href="/" className="logo logo-light">
                                     <span className="logo-sm">
                                         <img src="/images/logo-sm.png" alt="" height="22" />
                                     </span>
                                     <span className="logo-lg">
                                         <img src="/images/logo-light.png" alt="" height="17" />
                                     </span>
-                                </a>
+                                </Link>
                             </div>
 
                             <button type="button" className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon" onClick={() => openMenu()}>
@@ -46,7 +75,7 @@ const TopHeader = () => {
                         <div className="d-flex align-items-center">
 
                             <div className="dropdown d-md-none topbar-head-dropdown header-item">
-                                <button type="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                     <i className="bx bx-search fs-22"></i>
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
@@ -62,11 +91,11 @@ const TopHeader = () => {
                             </div>
 
                             <div className="dropdown topbar-head-dropdown ms-1 header-item" id="notificationDropdown">
-                                <button type="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" className={`btn btn-icon btn-topbar btn-ghost-secondary rounded-circle ${notificationDD ? 'show' : ''}`} id="page-header-notifications-dropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded={`${notificationDD ? true : false}`} onClick={() => bellDropDown()}>
                                     <i className='bx bx-bell fs-22'></i>
                                     <span className="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">3<span className="visually-hidden">unread messages</span></span>
                                 </button>
-                                <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
+                                <div className={`dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 ${notificationDD ? 'show notificationHeader' : ''}`} aria-labelledby="page-header-notifications-dropdown" data-popper-placement={`${notificationDD ? 'bottom-end' : ''}`}>
 
                                     <div className="dropdown-head bg-primary bg-pattern rounded-top">
                                         <div className="p-3">
@@ -83,19 +112,19 @@ const TopHeader = () => {
                                         <div className="px-2 pt-2">
                                             <ul className="nav nav-tabs dropdown-tabs nav-tabs-custom" data-dropdown-tabs="true" id="notificationItemsTab" role="tablist">
                                                 <li className="nav-item waves-effect waves-light">
-                                                    <a className="nav-link active" data-bs-toggle="tab" href="#all-noti-tab" role="tab" aria-selected="true">
+                                                    <Link className="nav-link active" data-bs-toggle="tab" href="#all-noti-tab" role="tab" aria-selected="true">
                                                         All (4)
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="nav-item waves-effect waves-light">
-                                                    <a className="nav-link" data-bs-toggle="tab" href="#messages-tab" role="tab" aria-selected="false">
+                                                    <Link className="nav-link" data-bs-toggle="tab" href="#messages-tab" role="tab" aria-selected="false">
                                                         Messages
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                                 <li className="nav-item waves-effect waves-light">
-                                                    <a className="nav-link" data-bs-toggle="tab" href="#alerts-tab" role="tab" aria-selected="false">
+                                                    <Link className="nav-link" data-bs-toggle="tab" href="#alerts-tab" role="tab" aria-selected="false">
                                                         Alerts
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -113,12 +142,12 @@ const TopHeader = () => {
                                                             </span>
                                                         </div>
                                                         <div className="flex-grow-1">
-                                                            <a href="#!" className="stretched-link">
+                                                            <Link href="#!" className="stretched-link">
                                                                 <h6 className="mt-0 mb-2 lh-base">Your <b>Elite</b> author Graphic
                                                                     Optimization <span className="text-secondary">reward</span> is
                                                                     ready!
                                                                 </h6>
-                                                            </a>
+                                                            </Link>
                                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                                 <span><i className="mdi mdi-clock-outline"></i> Just 30 sec ago</span>
                                                             </p>
@@ -136,9 +165,9 @@ const TopHeader = () => {
                                                     <div className="d-flex">
                                                         <img src="/images/users/avatar-2.jpg" className="me-3 rounded-circle avatar-xs flex-shrink-0" alt="user-pic" />
                                                             <div className="flex-grow-1">
-                                                                <a href="#!" className="stretched-link">
+                                                                <Link href="#!" className="stretched-link">
                                                                     <h6 className="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6>
-                                                                </a>
+                                                                </Link>
                                                                 <div className="fs-13 text-muted">
                                                                     <p className="mb-1">Answered to your comment on the cash flow forecast's
                                                                         graph 🔔.</p>
@@ -164,10 +193,10 @@ const TopHeader = () => {
                                                             </span>
                                                         </div>
                                                         <div className="flex-grow-1">
-                                                            <a href="#!" className="stretched-link">
+                                                            <Link href="#!" className="stretched-link">
                                                                 <h6 className="mt-0 mb-2 fs-13 lh-base">You have received <b className="text-success">20</b> new messages in the conversation
                                                                 </h6>
-                                                            </a>
+                                                            </Link>
                                                             <p className="mb-0 fs-11 fw-medium text-uppercase text-muted">
                                                                 <span><i className="mdi mdi-clock-outline"></i> 2 hrs ago</span>
                                                             </p>
@@ -185,9 +214,9 @@ const TopHeader = () => {
                                                     <div className="d-flex">
                                                         <img src="/images/users/avatar-8.jpg" className="me-3 rounded-circle avatar-xs flex-shrink-0" alt="user-pic" />
                                                             <div className="flex-grow-1">
-                                                                <a href="#!" className="stretched-link">
+                                                                <Link href="#!" className="stretched-link">
                                                                     <h6 className="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6>
-                                                                </a>
+                                                                </Link>
                                                                 <div className="fs-13 text-muted">
                                                                     <p className="mb-1">We talked about a project on linkedin.</p>
                                                                 </div>
@@ -218,9 +247,9 @@ const TopHeader = () => {
                                                     <div className="d-flex">
                                                         <img src="/images/users/avatar-3.jpg" className="me-3 rounded-circle avatar-xs" alt="user-pic" />
                                                             <div className="flex-grow-1">
-                                                                <a href="#!" className="stretched-link">
+                                                                <Link href="#!" className="stretched-link">
                                                                     <h6 className="mt-0 mb-1 fs-13 fw-semibold">James Lemire</h6>
-                                                                </a>
+                                                                </Link>
                                                                 <div className="fs-13 text-muted">
                                                                     <p className="mb-1">We talked about a project on linkedin.</p>
                                                                 </div>
@@ -241,9 +270,9 @@ const TopHeader = () => {
                                                     <div className="d-flex">
                                                         <img src="/images/users/avatar-2.jpg" className="me-3 rounded-circle avatar-xs" alt="user-pic" />
                                                             <div className="flex-grow-1">
-                                                                <a href="#!" className="stretched-link">
+                                                                <Link href="#!" className="stretched-link">
                                                                     <h6 className="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6>
-                                                                </a>
+                                                                </Link>
                                                                 <div className="fs-13 text-muted">
                                                                     <p className="mb-1">Answered to your comment on the cash flow forecast's
                                                                         graph 🔔.</p>
@@ -265,9 +294,9 @@ const TopHeader = () => {
                                                     <div className="d-flex">
                                                         <img src="/images/users/avatar-6.jpg" className="me-3 rounded-circle avatar-xs" alt="user-pic" />
                                                             <div className="flex-grow-1">
-                                                                <a href="#!" className="stretched-link">
+                                                                <Link href="#!" className="stretched-link">
                                                                     <h6 className="mt-0 mb-1 fs-13 fw-semibold">Kenneth Brown</h6>
-                                                                </a>
+                                                                </Link>
                                                                 <div className="fs-13 text-muted">
                                                                     <p className="mb-1">Mentionned you in his comment on 📃 invoice #12501.
                                                                     </p>
@@ -289,9 +318,9 @@ const TopHeader = () => {
                                                     <div className="d-flex">
                                                         <img src="/images/users/avatar-8.jpg" className="me-3 rounded-circle avatar-xs" alt="user-pic" />
                                                             <div className="flex-grow-1">
-                                                                <a href="#!" className="stretched-link">
+                                                                <Link href="#!" className="stretched-link">
                                                                     <h6 className="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6>
-                                                                </a>
+                                                                </Link>
                                                                 <div className="fs-13 text-muted">
                                                                     <p className="mb-1">We talked about a project on linkedin.</p>
                                                                 </div>
@@ -326,7 +355,7 @@ const TopHeader = () => {
                             </div>
 
                             <div className="dropdown ms-sm-3 header-item topbar-user">
-                                <button type="button" className="btn show" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <button type="button" className={`btn ${dropDown ? 'show' : ''}`} id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded={`${dropDown ? true : false}`} onClick={() => profileDropDown()}>
                                     <span className="d-flex align-items-center">
                                         <img className="rounded-circle header-profile-user" src="/images/avatar-1.jpg" alt="Header Avatar" />
                                             <span className="text-start ms-xl-2">
@@ -335,17 +364,17 @@ const TopHeader = () => {
                                             </span>
                                     </span>
                                 </button>
-                                <div className="dropdown-menu dropdown-menu-end" data-popper-placement="bottom-end" style={{ position: 'absolute', inset: '0px 0px auto auto', margin: '0px', transform: 'translate(0px, 65px)'}} >
+                                <div className={`dropdown-menu dropdown-menu-end ${dropDown ? 'show user-profile-dropdown-header' : ''}`} data-popper-placement={`${dropDown ? 'bottom-end' : ''}`}>
                                     <h6 className="dropdown-header">Welcome Anna!</h6>
-                                    <a className="dropdown-item" href="pages-profile.html"><i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Profile</span></a>
-                                    <a className="dropdown-item" href="apps-chat.html"><i className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Messages</span></a>
-                                    <a className="dropdown-item" href="apps-tasks-kanban.html"><i className="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Taskboard</span></a>
-                                    <a className="dropdown-item" href="pages-faqs.html"><i className="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Help</span></a>
+                                    <Link className="dropdown-item" href="pages-profile.html"><i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Profile</span></Link>
+                                    <Link className="dropdown-item" href="apps-chat.html"><i className="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Messages</span></Link>
+                                    <Link className="dropdown-item" href="apps-tasks-kanban.html"><i className="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Taskboard</span></Link>
+                                    <Link className="dropdown-item" href="pages-faqs.html"><i className="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Help</span></Link>
                                     <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="pages-profile.html"><i className="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Balance : <b>$5971.67</b></span></a>
-                                    <a className="dropdown-item" href="pages-profile-settings.html"><span className="badge bg-success-subtle text-success mt-1 float-end">New</span><i className="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Settings</span></a>
-                                    <a className="dropdown-item" href="auth-lockscreen-basic.html"><i className="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Lock screen</span></a>
-                                    <a className="dropdown-item" href="auth-logout-basic.html"><i className="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span className="align-middle" data-key="t-logout">Logout</span></a>
+                                    <Link className="dropdown-item" href="pages-profile.html"><i className="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Balance : <b>$5971.67</b></span></Link>
+                                    <Link className="dropdown-item" href="pages-profile-settings.html"><span className="badge bg-success-subtle text-success mt-1 float-end">New</span><i className="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Settings</span></Link>
+                                    <Link className="dropdown-item" href="auth-lockscreen-basic.html"><i className="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Lock screen</span></Link>
+                                    <Link className="dropdown-item" onClick={() => logout()}><i className="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span className="align-middle" data-key="t-logout">Logout</span></Link>
                                 </div>
                             </div>
                         </div>

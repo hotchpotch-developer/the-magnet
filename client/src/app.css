@@ -14537,4 +14537,18 @@ body::before {
     bottom: -18px;
     right: -35px;
 }
+
+.user-profile-dropdown-header {
+    position: absolute;
+    inset: 0px 0px auto auto;
+    margin: 0px;
+    transform: translate(0px, 65px);
+}
+
+.notificationHeader {
+    position: absolute;
+    inset: 0px 0px auto auto;
+    margin: 0px;
+    transform: translate(0px, 58px);
+}
 /*# sourceMappingURL=app.min.css.map */

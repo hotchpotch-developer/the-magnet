@@ -37,7 +37,7 @@ const Navbar = () => {
                         <ul className="navbar-nav" id="navbar-nav">
                             <li className="menu-title"><span data-key="t-menu">Menu</span></li>
                             <li className="nav-item">
-                                <Link className="nav-link menu-link" to="/">
+                                <Link className="nav-link menu-link" to="/dashboard">
                                     <i className="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboard</span>
                                 </Link>
                             </li> 

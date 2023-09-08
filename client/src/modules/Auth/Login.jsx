@@ -22,7 +22,7 @@ const Login = () => {
             let formData = new FormData(document.getElementById('loginForm'));
 
             fetchData(LOGIN, 'POST', formData, false, true, (res) => {
-                if(res.status == 200 && res.data){
+                if(res.status === 200 && res.data){
                     localStorage.setItem('accessToken', res.data.access_token)
                     setContext(prev => ({...prev, auth: res.data}));
                     navigate('/dashboard');
@@ -35,7 +35,8 @@ const Login = () => {
 
     useEffect(() => {
         document.querySelector("html").setAttribute("data-bs-theme", "dark");
-    }, []);
+        context && context.auth && navigate('/dashboard')
+    }, [context, navigate]);
 
     return (
         <>
