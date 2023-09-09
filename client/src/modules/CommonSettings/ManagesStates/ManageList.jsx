@@ -1,4 +1,4 @@
-import Datatable from "../../../components/Datatable";
+import Datatables from "../../../components/Datatables";
 
 const ManageList = () => {
 
@@ -6,7 +6,7 @@ const ManageList = () => {
 
         <>
             
-            <Datatable />
+            <Datatables />
         </>
 
     )

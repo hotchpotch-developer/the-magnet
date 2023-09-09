@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use DataTables;
 use DB;
 
 class PermissionController extends Controller
@@ -84,7 +85,7 @@ class PermissionController extends Controller
      * @return JSON
      */
 
-     public function deleteRole(Request $request) {
+    public function deleteRole(Request $request) {
         try {
 
             DB::beginTransaction();
@@ -94,6 +95,34 @@ class PermissionController extends Controller
             DB::commit();
 
             return jsonResponse(status: true, success: __('message.delete', ['Role']));
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return catchResponse(method: __METHOD__, exception: $th);
+        }
+    }
+
+    /**
+     * Role List
+     * 
+     * @author Vishal Soni  
+     * @package Permission
+     * @param Request $request
+     * @return JSON
+     */
+
+    public function roleList(Request $request) {
+        try {
+
+            $data = Role::select('id', 'name');
+
+            return DataTables::of($data)
+                        ->addIndexColumn()
+                        ->editColumn('action', function ($request) {
+                            return $request->id;
+                        })
+                        ->escapeColumns([])
+                        ->make(true);
 
         } catch (\Throwable $th) {
             DB::rollBack();
