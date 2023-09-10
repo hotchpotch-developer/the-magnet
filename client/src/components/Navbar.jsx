@@ -61,48 +61,21 @@ const Navbar = () => {
                             </li> 
                             <li className="nav-item">
                                 <Link className="nav-link menu-link" to="#managerMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="managerMenu">
-                                    <i className="ri-user-2-line"></i> <span data-key="t-apps">Manager</span>
+                                    <i className="ri-user-2-line"></i> <span data-key="t-apps">Teams</span>
                                 </Link>
                                 <div className="collapse menu-dropdown" id="managerMenu">
                                     <ul className="nav nav-sm flex-column">
                                         <li className="nav-item">
-                                            <Link to="/add-manager" className="nav-link" data-key="t-calendar"> Add Manager </Link>
+                                            <Link to="/add-manager" className="nav-link" data-key="t-calendar"> Admin </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="apps-chat.html" className="nav-link" data-key="t-chat"> Manage List </Link>
+                                            <Link to="/add-manager" className="nav-link" data-key="t-calendar"> Manager </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="apps-chat.html" className="nav-link" data-key="t-chat"> Assigned Job </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link menu-link" to="#tlMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="tlMenu">
-                                    <i className="ri-user-3-line"></i> <span data-key="t-apps">Team Leader</span>
-                                </Link>
-                                <div className="collapse menu-dropdown" id="tlMenu">
-                                    <ul className="nav nav-sm flex-column">
-                                        <li className="nav-item">
-                                            <Link to="apps-calendar.html" className="nav-link" data-key="t-calendar"> Add Team Leader </Link>
+                                            <Link to="apps-chat.html" className="nav-link" data-key="t-chat"> Team Leader </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="apps-chat.html" className="nav-link" data-key="t-chat"> Team Leader List </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link menu-link" to="#recruiterMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="recruiterMenu">
-                                    <i className="ri-group-2-line"></i> <span data-key="t-apps">Recruiter</span>
-                                </Link>
-                                <div className="collapse menu-dropdown" id="recruiterMenu">
-                                    <ul className="nav nav-sm flex-column">
-                                        <li className="nav-item">
-                                            <Link to="apps-calendar.html" className="nav-link" data-key="t-calendar"> Add Recruiter </Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link to="apps-chat.html" className="nav-link" data-key="t-chat"> Recruiter List </Link>
+                                            <Link to="apps-chat.html" className="nav-link" data-key="t-chat"> HR Recruiter </Link>
                                         </li>
                                     </ul>
                                 </div>
