@@ -8,6 +8,8 @@ return [
 
     "delete" => ":0 deleted successfully.",
 
+    "assign_permission_success" => "Permission assign successfully.",
+
     "logout" => "Logout successfully.",
     "error" => [
         "500" => "Oops! Something went wrong.",

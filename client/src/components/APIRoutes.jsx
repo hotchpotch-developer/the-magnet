@@ -12,3 +12,6 @@ export const EDIT_ROLE = "edit-role"
 export const DELETE_ROLE = "delete-role"
 
 export const PERMISSION_LIST = "permission-list"
+export const CREATE_PERMISSION = "create-permission"
+export const EDIT_PERMISSION = "edit-permission"
+export const DELETE_PERMISSION = "delete-permission"
