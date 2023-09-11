@@ -37,10 +37,10 @@ export const fetchData = async (url, method, data, token, process, res, abort_si
         if (json.message === "Unauthenticated.") {
             localStorage.removeItem("accessToken");
             window.location.href = '/'
-        } else if (!json.records) {
+        } else if (!json.data) {
             showAlertMsg(json, form_id)
             res(json)
-        } else if (json.records && json.records.length > 0) {
+        } else if (json.data && json.data.length > 0) {
             res(json)
         } else {
             showAlertMsg(json, form_id)
@@ -113,4 +113,19 @@ export const showAlertMsg = (data, form_id = false) => {
             $(`${form_id && `#${form_id} `}#${key}`).after(`<div class="invalid-feedback">${data.errors[key][0]}</div>`)
         }
     }
+}
+
+export const initialFormState = (formId, setData = false) => {
+    [...document.querySelectorAll(`#${formId} .form-control, #${formId} .form-select`)].forEach((ele) => {
+        ele.classList.remove('is-invalid');
+    });
+    [...document.querySelectorAll(`#${formId} .invalid-custom-feedback`)].forEach((ele) => {
+        ele.classList.add('d-none');
+    });
+    document.getElementById(formId).classList.remove('was-validated')
+    document.getElementById(formId).reset()
+    if (setData) {
+        setData(prevState => ({ ...prevState = '' }))
+    }
+    return setData;
 }

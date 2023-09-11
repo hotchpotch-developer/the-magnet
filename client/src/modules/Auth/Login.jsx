@@ -25,7 +25,7 @@ const Login = () => {
                 if(res.status === 200 && res.data){
                     localStorage.setItem('accessToken', res.data.access_token)
                     setContext(prev => ({...prev, auth: res.data}));
-                    navigate('/dashboard');
+                    navigate('/');
                 }
             })
 
@@ -34,8 +34,7 @@ const Login = () => {
     }
 
     useEffect(() => {
-        document.querySelector("html").setAttribute("data-bs-theme", "dark");
-        context && context.auth && navigate('/dashboard')
+        context && context.auth && navigate('/')
     }, [context, navigate]);
 
     return (

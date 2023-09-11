@@ -30,6 +30,8 @@ const Routing = () => {
         }else{
             navigate('/')
         }
+
+        document.querySelector("html").setAttribute("data-bs-theme", "dark");
     }, [token, navigate])
 
     return (
@@ -37,7 +39,7 @@ const Routing = () => {
             <Routes>
                 {context && context.auth &&
                     <Route caseSensitive={false} path="/" element={<Layout />}>
-                        <Route caseSensitive={false} path="dashboard" element={ <Dashboard />} />
+                        <Route caseSensitive={false} path="/" element={ <Dashboard />} />
 
                         {/* Permission Routes */}
                         

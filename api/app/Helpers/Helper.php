@@ -26,7 +26,7 @@ if (!function_exists('isValidatorFails')) {
     {
         $validator = Validator::make($request->all(), $rule, $message);
 
-        return $validator->fails() ? jsonResponse(status: 200, errors: $validator->errors()) : false;
+        return $validator->fails() ? jsonResponse(status: false, errors: $validator->errors()) : false;
     }
 }
 

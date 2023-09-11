@@ -55,12 +55,13 @@ class PermissionController extends Controller
     public function editRole(Request $request) {
         try {
             $rule = [
-                'role_name' => 'required|unique:roles,name'
+                'role_name' => 'required|unique:roles,name,'. $request->id . ',id'
             ];
 
             if ($errors = isValidatorFails($request, $rule)) return $errors;
 
             DB::beginTransaction();
+            
             $role = Role::where('id', $request->id)->first();
 
             $role->name = $request->role_name;

@@ -148,7 +148,7 @@ export const initDataTable = (dt) => {
             processing: "Loading...",
             'loadingRecords': '&nbsp;',
         },
-        lengthMenu: [[5, 10, 15, 25, 50, 100, 250, 500, -1], [5, 10, 15, 25, 50, 100, 250, 500, "All"]],
+        lengthMenu: [[15, 25, 50, 100, 250, 500, -1], [15, 25, 50, 100, 250, 500, "All"]],
         processing: true,
         serverSide: true,
         orderable: true,

@@ -37,13 +37,13 @@ const Navbar = () => {
                         <ul className="navbar-nav" id="navbar-nav">
                             <li className="menu-title"><span data-key="t-menu">Menu</span></li>
                             <li className="nav-item">
-                                <Link className="nav-link menu-link" to="/dashboard">
+                                <Link className="nav-link menu-link" to="/">
                                     <i className="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboard</span>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link menu-link" to="#managerMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="managerMenu">
-                                    <i className="ri-user-2-line"></i> <span data-key="t-apps">Permission</span>
+                                    <i className="ri-admin-line"></i> <span data-key="t-apps">Permission</span>
                                 </Link>
                                 <div className="collapse menu-dropdown" id="managerMenu">
                                     <ul className="nav nav-sm flex-column">
@@ -61,7 +61,7 @@ const Navbar = () => {
                             </li> 
                             <li className="nav-item">
                                 <Link className="nav-link menu-link" to="#managerMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="managerMenu">
-                                    <i className="ri-user-2-line"></i> <span data-key="t-apps">Teams</span>
+                                    <i className="ri-team-line"></i> <span data-key="t-apps">Teams</span>
                                 </Link>
                                 <div className="collapse menu-dropdown" id="managerMenu">
                                     <ul className="nav nav-sm flex-column">
@@ -97,7 +97,7 @@ const Navbar = () => {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link menu-link" to="#recruiterMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="recruiterMenu">
-                                    <i className="ri-user-5-line"></i> <span data-key="t-apps">Candidates</span>
+                                    <i className="ri-user-2-line"></i> <span data-key="t-apps">Candidates</span>
                                 </Link>
                                 <div className="collapse menu-dropdown" id="recruiterMenu">
                                     <ul className="nav nav-sm flex-column">
@@ -112,7 +112,7 @@ const Navbar = () => {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link menu-link" to="#recruiterMenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="recruiterMenu">
-                                    <i className="ri-file-edit-line"></i> <span data-key="t-apps">Common Settings</span>
+                                    <i className="ri-list-settings-line"></i> <span data-key="t-apps">Common Settings</span>
                                 </Link>
                                 <div className="collapse menu-dropdown" id="recruiterMenu">
                                     <ul className="nav nav-sm flex-column">
