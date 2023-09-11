@@ -11,6 +11,7 @@ import { fetchData } from "./Helper";
 import { GET_AUTH_INFO } from "./APIRoutes";
 import ErrorPage from "./ErrorPage";
 import ManageRoles from "../modules/Permission/ManageRoles";
+import ManagePermission from "../modules/Permission/ManagePermission";
 
 
 const Routing = () => {
@@ -42,8 +43,8 @@ const Routing = () => {
                         <Route caseSensitive={false} path="/" element={ <Dashboard />} />
 
                         {/* Permission Routes */}
-                        
                         <Route caseSensitive={false} path="/manage-roles" element={ <ManageRoles /> } />
+                        <Route caseSensitive={false} path="/manage-permission" element={ <ManagePermission /> } />
 
                         {/* Manager Routes */}
                         <Route caseSensitive={false} path="/add-manager" element={ <CreateManager />} />

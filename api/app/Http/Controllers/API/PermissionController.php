@@ -130,4 +130,32 @@ class PermissionController extends Controller
             return catchResponse(method: __METHOD__, exception: $th);
         }
     }
+
+    /**
+     * Permission List
+     * 
+     * @author Vishal Soni  
+     * @package Permission
+     * @param Request $request
+     * @return JSON
+     */
+
+    public function permissionList(Request $request) {
+        try {
+
+            $data = Role::select('id', 'name');
+
+            return DataTables::of($data)
+                        ->addIndexColumn()
+                        ->editColumn('action', function ($request) {
+                            return $request->id;
+                        })
+                        ->escapeColumns([])
+                        ->make(true);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return catchResponse(method: __METHOD__, exception: $th);
+        }
+    }
 }
