@@ -14604,6 +14604,100 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     justify-content: flex-end
 }
 
+.dt-button-collection {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 14px #ccc;
+    left: 932px !important;
+    margin-top: 0!important;
+    padding: 8px;
+    position: absolute;
+    top: 35px !important;
+    width: auto;
+    z-index: 10;
+}
+
+.dt-button-collection-title {
+    text-align: left !important;
+    font-size: 12px;
+}
+
+.dt-button {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    display: flex;
+    font-size: 14px;
+    padding: 5px 5px;
+    justify-content: space-between !important;
+    width: 150px;
+}
+
+.dt-custom-filter {
+    display: flex;
+    justify-content: end;
+    flex-flow: row-reverse;
+}
+
+.dataTables_filter label {
+    margin-bottom: 0 !important;
+    padding-bottom: 1px !important;
+    height: 35px;
+}
+
+.dataTables_filter label input[type="search"] {
+    height: 100%;
+    margin-left: 5px;
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding-left: 5px;
+}
+
+.dataTables_filter label input[type="search"]:focus-visible {
+    outline: 0 !important;
+}
+
+.pagination-custom{
+    margin: 2px 0 !important;
+    white-space: nowrap !important;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination-custom .paginate_button {
+    position: relative;
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8512rem;
+    border: 1px solid #2a4562;
+}
+
+.pagination-custom .paginate_button{
+    cursor: pointer;
+}
+
+.pagination-custom .paginate_button.disabled{
+    cursor: not-allowed;
+}
+
+.pagination-custom .paginate_button.previous{
+    border-radius: 5px 0 0 5px !important;
+}
+
+.pagination-custom .paginate_button.next{
+    border-radius: 0 5px 5px 0 !important;
+}
+
+.pagination-custom span {
+    display: inline-flex;
+}
+
+.pagination-custom .paginate_button.current{
+    background-color: #8c68cd !important;
+    color: #fff !important;
+    border: 1px solid #8c68cd !important;
+}
+
 .form-control.is-invalid, .was-validated .form-control:invalid {
     border-color: #f18275 !important;
     padding-right: 0 !important;

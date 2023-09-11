@@ -139,7 +139,7 @@ export const initDataTable = (dt) => {
     
     const table = $('#wt_datatable_' + dt.dt_name).DataTable({
         
-        dom: "B<'row clearfix mx-0'<'col-6 col-lg-2 px-0 text-center text-sm-start float-start'l><'dt-custom-filter col-6 col-lg-8 px-0 text-center text-sm-end exportbuttons'><'col-md-12 col-lg-2 px-0 ps-2 ps-ms-0 text-center text-lg-end'f>>" +
+        dom: "B<'row clearfix mx-0'<'col-6 col-lg-2 px-0 text-center text-sm-start float-start my-2'l><'dt-custom-filter col-md-6 my-2 col-lg-8 px-0 text-center text-sm-end exportbuttons'><'col-md-12 col-lg-2 px-0 ps-2 ps-ms-0 text-center text-lg-end my-2'f>>" +
             "<'row clearfix mx-0'<'col-sm-12 px-0'<'table-responsive position-relative my-1' tr>>>" +
             "<'row clearfix mx-0'<'col-md-12 col-lg-5 px-0 text-center text-lg-start'i><'col-md-12 col-lg-7 px-0 text-center text-lg-end'p>>",
         // dom: 'Bfrtip',
@@ -187,6 +187,7 @@ export const reloadDataTable = (dt) => {
 export const redrawDataTable = (dt) => {
     if ($.fn.DataTable.isDataTable('#wt_datatable_' + dt.dt_name)) {
         $('#wt_datatable_' + dt.dt_name).DataTable().clear().draw(null, false);
+        $('.dataTables_paginate').addClass('pagination-custom');
     } else {
         initDataTable(dt);
     }
