@@ -1,4 +1,21 @@
+import React from "react"
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated';
 import { initialFormState } from "./Helper"
+
+const animatedComponents = makeAnimated();
+
+export const reactSelectValidation = (e, field_id, multi = true) => {
+    if (document.querySelector('#' + field_id).closest('form').classList.contains('was-validated')) {
+        if ((multi === true && e.length) || (multi === false && e)) {
+            document.querySelector('#' + field_id).classList.add("is-valid");
+            document.querySelector('#' + field_id).classList.remove("is-invalid");
+        } else {
+            document.querySelector('#' + field_id).classList.add("is-invalid");
+            document.querySelector('#' + field_id).classList.remove("is-valid");
+        }
+    }
+}
 
 export const ModalSection = (props) => {
     return (
@@ -62,4 +79,15 @@ export const ConfirmationModal = (props) => {
             </div>
         </div>
     )
+}
+
+export const ReactSelect = (props) => {
+
+    return(
+        <Select 
+            components={animatedComponents}
+            {...props}
+        />
+    )
+
 }

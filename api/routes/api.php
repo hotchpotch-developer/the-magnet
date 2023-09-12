@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PermissionController;
+use App\Http\Controllers\API\CommonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     
     #Get User Info
     Route::get('get-auth-user-info', [AuthController::class, 'getAuthUserInfo']);
+
+    #Common DropDown
+    Route::get('common-dropdown', [CommonController::class, 'commonDropDown']);
 
     #Logout
     Route::get('logout', [AuthController::class, 'logout']);

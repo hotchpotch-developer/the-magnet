@@ -14709,4 +14709,13 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     padding-right: 0 !important;
 }
 
+#react-select-3-listbox {
+    color: #000 !important;
+    font-weight: 500;
+}
+
+.css-tj5bde-Svg {
+    color: #aaa;
+}
+
 /*# sourceMappingURL=app.min.css.map */
