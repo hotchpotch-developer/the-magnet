@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import Datatables, { redrawDataTable, reloadDataTable } from "../../components/Datatables";
+import Datatables, { redrawDataTable } from "../../components/Datatables";
 import { now } from 'lodash';
-import { ASSIGN_PERMISSION, COMMON_DROPDOWN, CREATE_ROLE, DELETE_ROLE, EDIT_ROLE, PERMISSION_LIST, ROLE_LIST } from "../../components/APIRoutes";
+import { ASSIGN_PERMISSION, COMMON_DROPDOWN, CREATE_ROLE, DELETE_ROLE, EDIT_ROLE, ROLE_LIST } from "../../components/APIRoutes";
 import { Context } from '../../components/Context'
 import { createRoot } from "react-dom/client"
 import $ from 'jquery'
