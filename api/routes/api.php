@@ -38,6 +38,14 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('delete-industry/{id}', [CommonController::class, 'deleteIndustry']);
     Route::get('industry-list', [CommonController::class, 'industryList']);
 
+    Route::post('add-location', [CommonController::class, 'addLocation']);
+    Route::post('edit-location', [CommonController::class, 'editLocation']);
+    Route::get('delete-location/{id}', [CommonController::class, 'deleteLocation']);
+    Route::get('location-list', [CommonController::class, 'locationList']);
+
+
+
+
 
     #Auth
     Route::get('logout', [AuthController::class, 'logout']);

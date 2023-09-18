@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use App\Models\Department;
 use App\Models\Industry;
+use App\Models\Location;
 use DB;
 use DataTables;
 
@@ -281,10 +282,140 @@ class CommonController extends Controller
      * @return JSON
      */
 
-     public function industryList(Request $request) {
+    public function industryList(Request $request) {
         try {
 
             $data = Industry::select('id', 'name');
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->editColumn('action', function ($request) {
+                    return $request->id;
+                })
+                ->escapeColumns([])
+                ->make(true);
+            
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return catchResponse(method: __METHOD__, exception: $th);
+        }
+    }
+
+
+
+    /**
+     * Add Location
+     * 
+     * @author Vishal Soni
+     * @package Common
+     * @param Request $request
+     * @return JSON
+     */
+
+    public function addLocation(Request $request) {
+        try {
+            $rule = [
+                'location_name' => 'required|unique:locations,name'
+            ];
+
+            if ($errors = isValidatorFails($request, $rule)) return $errors;
+
+            DB::beginTransaction();
+
+            $location = new Location;
+
+            $location->name = $request->location_name;
+
+            $location->save();
+
+            DB::commit();
+
+            return jsonResponse(status: true, success: __('message.create', ['Location']));
+
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return catchResponse(method: __METHOD__, exception: $th);
+        }
+    }
+
+
+    /**
+     * Edit Location
+     * 
+     * @author Vishal Soni
+     * @package Common
+     * @param Request $request
+     * @return JSON
+     */
+
+    public function editLocation(Request $request) {
+        try {
+
+            $rule = [
+                'location_name' => 'required|unique:locations,name,' . $request->id . ',id'
+            ];
+
+            if ($errors = isValidatorFails($request, $rule)) return $errors;
+
+            DB::beginTransaction();
+
+            $location = Location::find($request->id);
+
+            $location->name = $request->location_name;
+
+            $location->save();
+
+            DB::commit();
+
+            return jsonResponse(status: true, success: __('message.update', ['Location']));
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return catchResponse(method: __METHOD__, exception: $th);
+        }
+    }
+
+
+    /**
+     * Delete Location
+     * 
+     * @author Vishal Soni
+     * @package Common
+     * @param Request $request
+     * @return JSON
+     */
+
+    public function deleteLocation(Request $request) {
+        try {
+
+            DB::beginTransaction();
+
+            Location::find($request->id)->delete();
+
+            DB::commit();
+
+            return jsonResponse(status: true, success: __('message.delete', ['Location']));
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return catchResponse(method: __METHOD__, exception: $th);
+        }
+    }
+
+    /**
+     * Location List
+     * 
+     * @author Vishal Soni
+     * @package Common
+     * @param Request $request
+     * @return JSON
+     */
+
+     public function locationList(Request $request) {
+        try {
+
+            $data = Location::select('id', 'name');
 
             return DataTables::of($data)
                 ->addIndexColumn()
