@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\CommonController;
+use App\Http\Controllers\API\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('delete-permission/{id}', [PermissionController::class, 'deletePermission']);
 
     Route::post('assign-permission', [PermissionController::class, 'assignPermission']);
+
+    #Teams
+    Route::post('create-team', [TeamController::class, 'createTeam']);
 
 });

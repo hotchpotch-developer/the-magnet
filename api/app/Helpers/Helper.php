@@ -30,4 +30,24 @@ if (!function_exists('isValidatorFails')) {
     }
 }
 
+
+ if (!function_exists('uploadFiles')) {
+    function uploadFiles(Request $request, $param, $folder)
+    {
+        $imageNameArr = [];
+        if ($request->hasFile($param)) {
+            if (is_array($request->file($param))) {
+                foreach ($request->file($param) as $file) {
+                    $imageName = Storage::disk('public')->putFile($folder, $file);
+                    array_push($imageNameArr, $imageName);
+                }
+            } else {
+                $imageName = Storage::disk('public')->putFile($folder, $request->file($param));
+                array_push($imageNameArr, $imageName);
+            }
+        }
+        return implode(',', $imageNameArr);
+    }
+}
+
 ?>
