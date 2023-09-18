@@ -50,4 +50,21 @@ if (!function_exists('isValidatorFails')) {
     }
 }
 
+if (!function_exists('deleteFiles')) {
+    function deleteFiles($fileName)
+    {
+        try {
+            $fileNameArr = explode(',', $fileName);
+
+            foreach ($fileNameArr as $file) {
+                if (Storage::disk('public')->exists($file)) {
+                    Storage::disk('public')->delete($file);
+                }
+            }
+        } catch (\Exception $e) {
+            return returnResponse(error: 'Unable to delete files.');
+        }
+    }
+}
+
 ?>

@@ -11,7 +11,9 @@ return [
     "assign_permission_success" => "Permission assign successfully.",
 
     "team" => [
-        'create' => 'Team Member created successfully.'
+        'create' => 'Team Member created successfully.',
+        
+        'update' => 'Team Member updated successfully.'
     ],
 
     "logout" => "Logout successfully.",

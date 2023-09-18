@@ -46,5 +46,6 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     #Teams
     Route::post('create-team', [TeamController::class, 'createTeam']);
+    Route::post('edit-team', [TeamController::class, 'editTeam']);
 
 });
