@@ -25,10 +25,21 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     #Get User Info
     Route::get('get-auth-user-info', [AuthController::class, 'getAuthUserInfo']);
 
-    #Common DropDown
+    #Common
     Route::get('common-dropdown', [CommonController::class, 'commonDropDown']);
 
-    #Logout
+    Route::post('add-department', [CommonController::class, 'addDepartment']);
+    Route::post('edit-department', [CommonController::class, 'editDepartment']);
+    Route::get('delete-department/{id}', [CommonController::class, 'deleteDepartment']);
+    Route::get('department-list', [CommonController::class, 'departmentList']);
+
+    Route::post('add-industry', [CommonController::class, 'addIndustry']);
+    Route::post('edit-industry', [CommonController::class, 'editIndustry']);
+    Route::get('delete-industry/{id}', [CommonController::class, 'deleteIndustry']);
+    Route::get('industry-list', [CommonController::class, 'industryList']);
+
+
+    #Auth
     Route::get('logout', [AuthController::class, 'logout']);
 
     #Permission
@@ -47,5 +58,6 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     #Teams
     Route::post('create-team', [TeamController::class, 'createTeam']);
     Route::post('edit-team', [TeamController::class, 'editTeam']);
+    Route::get('team-list', [TeamController::class, 'teamList']);
 
 });

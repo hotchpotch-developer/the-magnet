@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
+use DataTables;
 use DB;
 
 class TeamController extends Controller
@@ -73,7 +75,7 @@ class TeamController extends Controller
     }
 
     /**
-     * Create Team Member
+     * Edit Team Member
      * 
      * @author Vishal Soni
      * @package Team
@@ -81,7 +83,7 @@ class TeamController extends Controller
      * @return JSON
      */
 
-     public function editTeam(Request $request) {
+    public function editTeam(Request $request) {
         try {
             
             $rule = [
@@ -140,4 +142,34 @@ class TeamController extends Controller
             return catchResponse(method: __METHOD__, exception: $th);
         }
     }
+
+
+    /**
+     * List Team Member
+     * 
+     * @author Vishal Soni
+     * @package Team
+     * @param Request $request
+     * @return JSON
+     */
+
+    public function teamList(Request $request){
+        try {
+            $data = Role::select('roles.id as roles_id', 'roles.name as roles_name', 'users.*')
+                        ->join('users', 'users.role_id', '=', 'roles.id')
+                        ->where('name', $request->type);
+                    
+                return DataTables::of($data)
+                        ->addIndexColumn()
+                        ->editColumn('action', function ($request) {
+                            return $request->id;
+                        })
+                        ->escapeColumns([])
+                        ->make(true);
+
+        } catch (\Throwable $th) {
+            return catchResponse(method: __METHOD__, exception: $th);
+        }
+    }
+    
 }
